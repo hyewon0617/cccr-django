@@ -9,9 +9,16 @@ class Question(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author_question')
     modify_date = models.DateTimeField(null=True, blank=True)
     voter = models.ManyToManyField(User, related_name='voter_question')
-  
+    hit_count = models.PositiveIntegerField(default=0, verbose_name='조회수')
+
     def __str__(self):
         return self.subject
+
+    @property
+    def update_counter(self):
+        self.hit_count = self.hit_count + 1
+        self.save()
+
 
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

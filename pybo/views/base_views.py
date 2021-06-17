@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q, Count
+from datetime import date, datetime, timedelta
 
 from ..models import Question
 
@@ -41,5 +42,8 @@ def index(request):
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     context = {'question': question}
+    question.hit_count += 1
+    question.save()
+
     return render(request, 'pybo/question_detail.html', context)
 

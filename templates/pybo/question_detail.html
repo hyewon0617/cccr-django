@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <div class="container my-3">
+
     {% if messages %}
     <div class="alert alert-danger my-3" role="alert">
     {% for message in messages %}
@@ -11,6 +13,7 @@
     {% endif %}
 
     <h2 class="border-bottom py-2">{{ question.subject }}</h2>
+    <span>조회수 : {{ question.hit_count }}</span>
     <div class="row my-3">
         <div class="col-1"> <!-- 추천영역 -->
             <div class="bg-light text-center p-3 border font-weight-bolder mb-1">{{question.voter.count}}</div>
